@@ -13,7 +13,7 @@ int main(){
     		for(int j=1;j<=m;j++) cin>>a[i][j];
 		}
 		for(int i=1;i<=n;i++){
-			a[i][m+1]=NINF;
+			a[i][0]=NINF;
 			a[i][m+1]=NINF;
 		}
 		int res=NINF;
