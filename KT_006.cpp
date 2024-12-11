@@ -3,22 +3,23 @@
 #define ull unsigned long long
 using namespace std;
 
-int count(int n,int m,int exp){
-	if(n==0||exp==0) return 1;
-	if(n>=pow(m,exp)) return count(n-pow(m,exp),m,exp)+count(n,m,exp-1);
-	else return count(n,m,exp-1);
-}
-
 int main(){
 	int t; cin>>t;
 	while(t--){
 		int n, m; cin>>n>>m;
-		int tmp=1, exp=-1;
-		while(tmp<=n){
-			tmp*=m;
-			exp++;
+		vector<ll> p;
+		int x = 1;
+		while(x <= n){
+			p.push_back(x);
+			x *= m;
 		}
-		cout<<count(n,m,exp)<<endl;
+		vector<int> dp(n+1, 0);
+		dp[0] = 1;
+		for(int x:p){
+			for(int i = x; i<=n; i++){
+				dp[i] += dp[i-x];
+			}
+		}
+		cout<<dp[n]<<endl;
 	}
-	return 0;
 }
