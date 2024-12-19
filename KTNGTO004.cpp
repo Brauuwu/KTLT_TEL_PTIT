@@ -1,25 +1,38 @@
 #include<bits/stdc++.h>
 #define ll long long
+#define ull unsigned long long
+#define oo 1e9
 using namespace std;
-ll solve(ll n){
-	ll res=-1;
+
+ll max_divisor(ll n){
+	ll res = 2;
 	while(n%2==0){
-		res=2;
-		n/=2;
+		n /= 2;
 	}
-	for(ll i=3;i*i<=n;i+=2){
+	while(n%3==0){
+		res = 3;
+		n /= 3;
+	}
+	for(ll i=5; i*i<=n; i+=6){
 		while(n%i==0){
-			res=i;
-			n/=i;
+			res = i;
+			n /= i;
+		}
+		ll x = i+2;
+		while(n%x==0){
+			res = x;
+			n /= x;
 		}
 	}
-	if(n>2) res=n;
+	if(n>1) res = n;
 	return res;
 }
+
 int main(){
 	int t; cin>>t;
-	while(t--){
-		ll n; cin>>n;
-		cout<<solve(n)<<endl;
+    while(t--){
+    	ll n; cin>>n;
+    	cout<<max_divisor(n)<<endl;
 	}
+    return 0;
 }
