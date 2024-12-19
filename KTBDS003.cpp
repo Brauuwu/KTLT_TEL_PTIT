@@ -1,23 +1,26 @@
 #include<bits/stdc++.h>
 #define ll long long
 #define ull unsigned long long
+#define oo 1e9
 using namespace std;
 
-ull ans(ull n,ull k){
-	if(n<k) return 0;
-	if(k==1) return 1;
-	ll cnt=n-1;
-	for(int i=2;i<=k-1;i++){
-		cnt*=n-i;
-		cnt/=i;
+ll C[100][100];
+
+void Pascal(){
+	for(int i=0; i<=100; i++){
+		for(int j=0; j<=i; j++){
+			if(j==0 || j==i) C[i][j]=1;
+			else C[i][j] = C[i-1][j] + C[i-1][j-1];
+		}
 	}
-	return cnt;
 }
 
 int main(){
+	Pascal();
 	int t; cin>>t;
-	while(t--){
-		ull n,k; cin>>n>>k;
-		cout<<ans(n,k)<<endl;
+    while(t--){
+    	int n, k; cin>>n>>k;
+    	cout<<C[n-1][k-1]<<endl;
 	}
+    return 0;
 }
